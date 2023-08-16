@@ -1,8 +1,8 @@
 from abc import ABC
 from typing import List
 from superagi.tools.base_tool import BaseTool, BaseToolkit
-from superagi.tools.marketplace_tools.pyppeteer.tools import PyppeteerTool
-from superagi.tools.marketplace_tools.pyppeteer.tools import PyppeteerToolTextOnly
+from tools import PyppeteerTool
+from tools import PyppeteerToolTextOnly
 
 
 class PyppeteerWebScrapperToolkit(BaseToolkit, ABC):
