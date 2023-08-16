@@ -1,6 +1,6 @@
 from abc import ABC
 from typing import List
-from s import BaseTool, BaseToolkit
+from superagi.tools.base_tool import BaseTool, BaseToolkit
 from pyppeteer_tools import PyppeteerTool
 from pyppeteer_tools import PyppeteerToolTextOnly
 
