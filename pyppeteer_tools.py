@@ -88,10 +88,24 @@ class PyppeteerToolTextOnly(PyppeteerTool):
 
     def _execute(self, website_url: str) -> tuple:
         loop = asyncio.get_event_loop()
-        content = loop.run_until_complete(self.PyppeteerExtract(website_url, True))
-        words = content.split()
-        short_content = ' '.join(words[:600])
-        return short_content
+        raw_content = loop.run_until_complete(self.PyppeteerExtract(website_url, True))
+
+        # Splits content into words while preserving newlines
+        words_and_newlines = re.findall(r'\S+|\n', raw_content)
+
+        # Remove more than 2 consecutive newlines
+        cleaned_content = []
+        newline_streak = 0
+        for word in words_and_newlines:
+            if word == '\n':
+                newline_streak += 1
+                if newline_streak <= 2:
+                    cleaned_content.append(word)
+            else:
+                newline_streak = 0
+                cleaned_content.append(word)
+        
+        return ' '.join(cleaned_content[:600])
     
 #For local debugging - you can run it from the command line.  Easier to debug Pyppeteer this way.
 def main():
