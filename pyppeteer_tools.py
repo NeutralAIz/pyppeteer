@@ -89,8 +89,9 @@ class PyppeteerToolTextOnly(PyppeteerTool):
     def _execute(self, website_url: str) -> tuple:
         loop = asyncio.get_event_loop()
         content = loop.run_until_complete(self.PyppeteerExtract(website_url, True))
-        max_length = len(' '.join(content.split(" ")[:600]))
-        return content[:max_length]
+        cleaned_content = ' '.join(content.split())
+        max_length = len(cleaned_content.split(" ")[:600])
+        return cleaned_content[:max_length]
 
 #For local debugging - you can run it from the command line.  Easier to debug Pyppeteer this way.
 def main():
