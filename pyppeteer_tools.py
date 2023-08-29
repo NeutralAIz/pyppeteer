@@ -7,6 +7,7 @@ from pydantic import BaseModel, Field
 from superagi.tools.base_tool import BaseTool
 from pyppeteer import launch
 from bs4 import BeautifulSoup
+import re
 
 class PyppeteerSchema(BaseModel):
     website_url: str = Field(
